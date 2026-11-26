@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ai-media-detector-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ai-media-detector-db
+          property: connectionString
+
+databases:
+  - name: ai-media-detector-db
+    plan: free
+    
